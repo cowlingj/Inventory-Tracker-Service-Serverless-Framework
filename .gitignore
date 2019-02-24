@@ -1,0 +1,11 @@
+config-app/**/secrets/**
+!config-app/**/secrets/.gitkeep
+config-build/**/secrets/**
+!config-build/**/secrets/.gitkeep
+
+node_modules
+jspm_packages
+
+.serverless
+
+.webpack

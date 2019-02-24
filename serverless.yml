@@ -1,0 +1,33 @@
+service:
+  name: inventory-tracker-service
+
+plugins:
+  - serverless-webpack
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${opt:stage}
+  # profile: profilename
+  region: eu-west-1
+  apiKeys:
+    - testkey
+
+custom:
+  configDir: config-app/${self:provider.stage, 'main'}
+  buildConfigDir: config-build/${self:provider.stage, 'main'}
+  secretsDir: ${self:custom.configDir}/secrets
+  srcDir: src
+  webpack:
+    webpackConfig: ./${self:custom.buildConfigDir}/webpack.config.js
+
+functions:
+  hello:
+    handler: src/handler.hello
+    environment:
+      FIREBASE_CONFIG: ${self:custom.secretsDir}/firebase.config.json
+    events:
+      - http:
+          method: get
+          path: /
+          private: true
