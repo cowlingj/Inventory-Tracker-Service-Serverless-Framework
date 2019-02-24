@@ -19,7 +19,7 @@ custom:
   secretsDir: ${self:custom.configDir}/secrets
   srcDir: src
   webpack:
-    webpackConfig: ./${self:custom.buildConfigDir}/webpack.config.js
+    webpackConfig: ./${self:custom.buildConfigDir}/webpack.config.ts
 
 functions:
   hello:
